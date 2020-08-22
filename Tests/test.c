@@ -2,7 +2,12 @@
 
 int main() {
 
-    printf("%f", 0 - 0);
+    if ( 1 == 1 && 1 != 1 || 1 == 1 && 1 != 1 || 1 == 1 && 1 != 1 ) {
+        printf("true\n");
+    }
+    else {
+        printf("false\n");
+    }
 
     return 0;
 }
