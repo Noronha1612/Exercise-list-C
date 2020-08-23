@@ -55,7 +55,7 @@ int main() {
             printf("[%i] %s%i - BRL %.2f\n", option + (drinkTypeCode * 100), drinkTypes[drinkTypeCode - 1], option + 1, prices[drinkTypeCode - 1][option]);
         }
 
-        //printf("\n%i\n%i\n", drinkTypeCode * 100, (drinkTypeCode * 100) + 2);
+        // printf("\n%i\n%i\n", drinkTypeCode * 100, (drinkTypeCode * 100) + 2); // Apenas para debug
 
         drinkOptionCode = readInteger("Your option:", drinkTypeCode * 100, (drinkTypeCode * 100) + 2, "option"); // Não está impondo limites por algum motivo
 
