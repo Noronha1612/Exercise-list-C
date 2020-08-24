@@ -7,8 +7,9 @@ int readInteger(char* msg, int start, int end, char subject[255]) {
     while(1) {
         printf("%s", msg);
         scanf("%i", &integer);
+        getchar();
 
-        if( integer <= end || end == -1 && integer >= start ) break;
+        if( (integer <= end || end == -1) && integer >= start ) break;
         printf("Type a valid %s.\n", subject);
     }
 
