@@ -34,7 +34,7 @@ int main() {
 
         while(1) {
             printf("How much do you earn by year? USD ");
-            scanf("%f", salary);
+            scanf("%f", &salary);
 
             if ( salary >= 0 ) break;
             printf("Type a valid quantity.\n"); 
