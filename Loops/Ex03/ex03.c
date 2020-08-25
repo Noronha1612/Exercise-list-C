@@ -1,10 +1,6 @@
 #include "stdio.h"
 #include "math.h"
 
-/**
- * Crashando quando passa do 1° looping
-*/
-
 int readPositiveInteger(char* msg, int min) {
     int value;
 
@@ -20,20 +16,19 @@ int readPositiveInteger(char* msg, int min) {
 }
 
 int main() {
-
+    int sumChilds = 0, sumMoreThan2Childs = 0;
+    float sumSalary = 0, biggestSalary = 0, lowestSalary = 0;
+    
     int surveyQuantity = readPositiveInteger("How many peoples joined the survey?", 1);
 
-    int sumChilds, sumMoreThan2Childs;
-    float sumSalary, biggestSalary = 0, lowestSalary = 0;
-
     for ( int interviewed = 0; interviewed < surveyQuantity; interviewed++ ) {
-        printf("\nInterviewed %i, please answer:\n");
+        printf("\nInterviewed %i, please answer:\n", interviewed + 1);
 
         int childsQuantity = readPositiveInteger("How many childs do you have?", 0);
         float salary;
 
         while(1) {
-            printf("How much do you earn by year? USD ");
+            printf("How much do you earn by year? USD");
             scanf("%f", &salary);
 
             if ( salary >= 0 ) break;
@@ -53,12 +48,15 @@ int main() {
 
     printf("\nSurver result:\n");
 
-    printf("Salary average: USD %.2f\n", salaryAverage);
+    printf("Salary average: USD");
+    fmodf(salaryAverage, 1) == 0 ? 
+    printf("%i\n", (int) salaryAverage) :
+    printf("%.2f\n", salaryAverage);
 
     printf("Childs average: ");
     fmodf(childsAverage, 1) == 0 ? 
     printf("%i\n", (int) childsAverage) :
-    printf("%f\n", childsAverage);
+    printf("%.2f\n", childsAverage);
 
     printf("Biggest salary: USD %.2f\n", biggestSalary);
 
