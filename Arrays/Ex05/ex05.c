@@ -8,33 +8,27 @@ Mostre na tela os dados do vetor C.
 
 */
 
+void readArrayElements(int arr[]) {
+    for ( int x = 0; x < 10; x++ ) {
+        int element;
+
+        printf("Type the %i element: ", x + 1);
+        scanf("%i", &element);
+        getchar();
+
+        arr[x] = element;
+    }
+}
+
 int main() {
 
     int A[10], B[10], C[10];
 
     printf("Elements of A:\n");
-
-    for ( int x = 0; x < 10; x++ ) {
-        int element;
-
-        printf("Type the %i element: ", x + 1);
-        scanf("%i", &element);
-        getchar();
-
-        A[x] = element;
-    }
+    readArrayElements(A);
 
     printf("\nElements of B:\n");
-
-    for ( int x = 0; x < 10; x++ ) {
-        int element;
-
-        printf("Type the %i element: ", x + 1);
-        scanf("%i", &element);
-        getchar();
-
-        B[x] = element;
-    }
+    readArrayElements(B);
 
     for ( int x = 0; x < 10; x++ ) {
         C[x] = A[x] - B[x];
