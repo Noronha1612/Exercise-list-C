@@ -21,11 +21,16 @@ void readElements(int* array, int size) {
     }
 }
 
-int insertIfNotExist(int* array, int size, int index, int element) {
+int insertIfNotExist(int* array, int size, int index, int element, int has0) {
     int doesElementAlreadyExist = 0;
 
     for ( int e = 0; e < size; e++ ) {
         if ( element == array[e] ) doesElementAlreadyExist = 1;
+    }
+
+    if ( element == 0 && !has0 ) {
+        array[index] = element;
+        return 2;
     }
 
     if ( !doesElementAlreadyExist ) {
@@ -48,6 +53,7 @@ int main() {
 
     int in1NotIn2[10], in2NotIn1[20];
     int counter1 = 0, counter2 = 0;
+    int a1Has0 = 0, a2Has0 = 0;
 
     for ( int x = 0; x < 10; x++ ) {
         int e1 = array1[x];
@@ -58,8 +64,10 @@ int main() {
         }
 
         if ( !does1ExistOn2 ) {
-            int didInsert = insertIfNotExist(in1NotIn2, 10, counter1, e1);
+            int didInsert = insertIfNotExist(in1NotIn2, 10, counter1, e1, a1Has0);
             if ( didInsert ) counter1++;
+
+            if ( didInsert == 2 ) a1Has0 = 1;
         }
     }
 
@@ -72,8 +80,10 @@ int main() {
         }
 
         if ( !does2ExistOn1 ) {
-            int didInsert = insertIfNotExist(in2NotIn1, 20, counter2, e2);
+            int didInsert = insertIfNotExist(in2NotIn1, 20, counter2, e2, a2Has0);
             if ( didInsert ) counter2++;
+
+            if ( didInsert == 2 ) a2Has0 = 1;
         }
     }
 
