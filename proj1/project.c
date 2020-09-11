@@ -279,9 +279,9 @@ int matchCersei(int playerHealth, int cerseiHealth) {
         }
     }
 
-    if ( didCerseiJoin ) return 0;
-
     clearScreen();
+
+    if ( didCerseiJoin ) return 0;
 
     // War
     printf("\n\nCersei did not join john and started a war.\n");
@@ -347,6 +347,70 @@ int matchCersei(int playerHealth, int cerseiHealth) {
     
     return -1;
     
+}
+
+// Will return 0 if John lose and 1 if John win
+int finalFight(int johnHealth, int NKHealth) {
+    clearScreen();
+
+    printf("Final fight has begun!\n");
+    printf("(You will have 50%% of chance to inflict 10HP damage each round.\n");
+    printf("The Night King will have the same chance, but, instead inflict 10HP\n");
+    printf("he will only inflict 5HP. However, if he hits you, he will cure 5HP.)\n\n");
+
+    int player = 1;
+    int didPlayerWin = 0;
+
+    srand(time(NULL));
+
+    while(1) {
+        printf("Round: %s\n", player == 1 ? "John" : "Night King");
+        printf("Your health: %iHP\n", johnHealth);
+        printf("Night King's health: %iHP\n\n", NKHealth);
+
+        if( player == 1 ) {
+            printf("Type ENTER to attack Night King\n");
+            getchar();
+
+            clearScreen();
+
+            int powAttack = rand() % 100;
+
+            if ( powAttack >= 50 ) {
+                NKHealth -= 10;
+
+                printf("You inflicted 10HP to Night King!\n\n");
+            }
+            else printf("You missed!\n\n");
+        }
+        else if ( player == 0 ) {
+            printf("Type ENTER to continue\n");
+            getchar();
+
+            clearScreen();
+
+            int powAttack = rand() % 100;
+
+            if ( powAttack >= 50 ) {
+                NKHealth += 5;
+                johnHealth -= 5;
+
+                printf("Night King hits you, healing 5HP and inflicting 5HP!\n\n");
+            }
+            else printf("Night King missed!\n\n");
+        }
+
+        if ( johnHealth <= 0 ) break;
+        if ( NKHealth <= 0 ) {
+            didPlayerWin = 1;
+            break;
+        }
+
+        player = player == 1? 0 : 1;
+    }
+
+    if ( didPlayerWin ) return 1;
+    else return 0;
 }
 
 int main() {
@@ -441,12 +505,20 @@ int main() {
 
             else if ( code == 106 ) {
                 if ( !john.hasMatchCersei ) printf("You must match Cersei first.");
-                else printf("Final fight!");
+                else {
+                    int johnWon = finalFight(john.health, nightKing.health);
+                    
+                    if ( johnWon == 1 ) didUserWin = 1;
+
+                    break;
+                }
             }
 
             printf("\n\n");
         }
     }
+
+    clearScreen();
 
     if ( didUserWin ) printf("\n\nYOU WON!\n\n");
     else printf("\n\nYou died...\n\n");
