@@ -81,6 +81,7 @@ void showBoard( int mainBoard[10][10], char johnId, char cerseiId, char nightKin
             if ( identifier == 1 ) printf("%c ", johnId);
             else if ( identifier == 2 ) printf("%c ", cerseiId);
             else if ( identifier == 3 ) printf("%c ", nightKingId);
+            else if ( identifier == 15 ) printf("O ");
             else printf(". ");
         }
         printf("\n");
@@ -107,11 +108,14 @@ int movePlayer( int mainBoard[10][10], int johnPosition[2], char move ) {
 
         int nextSquare = mainBoard[johnX - 1][johnY];
 
-        if ( nextSquare == 5 ) return 101;
-
         if ( nextSquare == 2 ) return 105;
 
         if ( nextSquare == 3 ) return 106;
+
+        if ( nextSquare == 5 ) {
+            mainBoard[johnX - 1][johnY] = 15;
+            return 101;
+        }
 
         if ( nextSquare == 4 ) {
             mainBoard[johnX][johnY] = 0;
@@ -143,11 +147,14 @@ int movePlayer( int mainBoard[10][10], int johnPosition[2], char move ) {
 
         int nextSquare = mainBoard[johnX + 1][johnY];
 
-        if ( nextSquare == 5 ) return 101;
-
         if ( nextSquare == 2 ) return 105;
 
         if ( nextSquare == 3 ) return 106;
+
+        if ( nextSquare == 5 ) {
+            mainBoard[johnX + 1][johnY] = 15;
+            return 101;
+        }
 
         if ( nextSquare == 4 ) {
             mainBoard[johnX][johnY] = 0;
@@ -179,11 +186,14 @@ int movePlayer( int mainBoard[10][10], int johnPosition[2], char move ) {
 
         int nextSquare = mainBoard[johnX][johnY - 1];
 
-        if ( nextSquare == 5 ) return 101;
-
         if ( nextSquare == 2 ) return 105;
 
         if ( nextSquare == 3 ) return 106;
+
+        if ( nextSquare == 5 ) {
+            mainBoard[johnX][johnY - 1] = 15;
+            return 101;
+        }
 
         if ( nextSquare == 4 ) {
             mainBoard[johnX][johnY] = 0;
@@ -215,11 +225,14 @@ int movePlayer( int mainBoard[10][10], int johnPosition[2], char move ) {
 
         int nextSquare = mainBoard[johnX][johnY + 1];
 
-        if ( nextSquare == 5 ) return 101;
-
         if ( nextSquare == 2 ) return 105;
 
         if ( nextSquare == 3 ) return 106;
+
+        if ( nextSquare == 5 ) {
+            mainBoard[johnX][johnY + 1] = 15;
+            return 101;
+        }
 
         if ( nextSquare == 4 ) {
             mainBoard[johnX][johnY] = 0;
